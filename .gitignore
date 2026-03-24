@@ -1,0 +1,4 @@
+/truthmetal
+*.test
+*.out
+vendor/

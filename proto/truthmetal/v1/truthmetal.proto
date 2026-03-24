@@ -1,0 +1,118 @@
+syntax = "proto3";
+
+package truthmetal.v1;
+
+option go_package = "github.com/ldamasio/truthmetal/gen/truthmetal/v1;truthmetalv1";
+
+import "google/protobuf/timestamp.proto";
+
+// ParameterState represents the lifecycle state of a parameter.
+enum ParameterState {
+  PARAMETER_STATE_UNSPECIFIED = 0;
+  PARAMETER_STATE_SUBMITTED = 1;
+  PARAMETER_STATE_VALIDATING = 2;
+  PARAMETER_STATE_CONSENSUS_PENDING = 3;
+  PARAMETER_STATE_CANONICAL = 4;
+  PARAMETER_STATE_REJECTED = 5;
+  PARAMETER_STATE_REVOKED = 6;
+}
+
+// Parameter is an immutable, versioned key-value fact.
+message Parameter {
+  string id = 1;
+  string key = 2;
+  string value = 3;
+  string value_type = 4;
+  string namespace = 5;
+  string source = 6;
+  string source_ref = 7;
+  int64 version = 8;
+  string previous_version_id = 9;
+  ParameterState state = 10;
+  map<string, string> metadata = 11;
+  google.protobuf.Timestamp created_at = 12;
+  google.protobuf.Timestamp updated_at = 13;
+}
+
+// LedgerEvent records every state transition.
+message LedgerEvent {
+  string id = 1;
+  string parameter_id = 2;
+  string event_type = 3;
+  string from_state = 4;
+  string to_state = 5;
+  string actor = 6;
+  string reason = 7;
+  map<string, string> context = 8;
+  google.protobuf.Timestamp occurred_at = 9;
+}
+
+message SubmitRequest {
+  string key = 1;
+  string value = 2;
+  string value_type = 3;
+  string namespace = 4;
+  string source = 5;
+  string source_ref = 6;
+  map<string, string> metadata = 7;
+  string actor = 8;
+}
+
+message SubmitResponse {
+  Parameter parameter = 1;
+}
+
+message GetRequest {
+  string namespace = 1;
+  string key = 2;
+}
+
+message GetResponse {
+  Parameter parameter = 1;
+}
+
+message GetVersionRequest {
+  string id = 1;
+}
+
+message GetVersionResponse {
+  Parameter parameter = 1;
+}
+
+message RevokeRequest {
+  string namespace = 1;
+  string key = 2;
+  string reason = 3;
+  string actor = 4;
+}
+
+message RevokeResponse {
+  Parameter parameter = 1;
+}
+
+message QueryAuditRequest {
+  string namespace = 1;
+  string key = 2;
+  int64 limit = 3;
+  int64 offset = 4;
+}
+
+message QueryAuditResponse {
+  repeated LedgerEvent events = 1;
+  int64 total = 2;
+}
+
+message WatchRequest {
+  string namespace = 1;
+  string key_prefix = 2;
+}
+
+// TruthMetalService is the canonical ground truth control plane API.
+service TruthMetalService {
+  rpc Submit(SubmitRequest) returns (SubmitResponse);
+  rpc Get(GetRequest) returns (GetResponse);
+  rpc GetVersion(GetVersionRequest) returns (GetVersionResponse);
+  rpc Revoke(RevokeRequest) returns (RevokeResponse);
+  rpc QueryAudit(QueryAuditRequest) returns (QueryAuditResponse);
+  rpc Watch(WatchRequest) returns (stream LedgerEvent);
+}
