@@ -1,0 +1,65 @@
+{
+  "schema_version": "1.0",
+  "suite_id": "rbx-public-assistant-pt-br-v1",
+  "package_id": "rbx-rag-public-assistant",
+  "status": "accepted",
+  "authority": "truthmetal",
+  "intended_executor": "verentir",
+  "mode": "shadow",
+  "proposed_at": "2026-08-06",
+  "canonical_ref": "refs/heads/main",
+  "source": {
+    "repository": "https://github.com/rbxrobotica/rbx-rag-public-assistant",
+    "commit_sha": "1fbe1586da0bbd18f2bd4fc2ad2ca2d7e129493e",
+    "quality_gate_sha256": "e157b2a6b523c7ed9b0fa01df85f6b36885633eea88cae4df14ab9a409e40211",
+    "case_set_sha256": "f5f3c80f249fd5d1126ce59c766088dcbd120813118ca741de1da26847d2e08b",
+    "case_count": 38
+  },
+  "accepted_artifacts": {
+    "quality_gate_file": "quality-gates.json",
+    "quality_gate_sha256": "65b2b65af62bc483b0a47a4f44dcfcff498741dcdfade39a2195a1b08de17780",
+    "case_set_file": "cases.json",
+    "case_set_sha256": "d528e203b2c2c95dace37f3abef0aa27822eb6ced6e12681d28598b3e51c24d5",
+    "case_count": 30
+  },
+  "blocked_evidence_document_ids": [
+    "rbx-public-strategos-pt-br-v1"
+  ],
+  "excluded_cases": [
+    {
+      "id": "public-assistant-product-ownership-pt-br",
+      "reason": "Depends on public Strategos and product-ownership claims that are not yet permitted in the claims register."
+    },
+    {
+      "id": "public-assistant-strategos-boundary-pt-br",
+      "reason": "Depends on the public Strategos claim family that is not yet permitted in the claims register."
+    },
+    {
+      "id": "public-assistant-strategos-definition-pt-br",
+      "reason": "Depends on the public Strategos claim family that is not yet permitted in the claims register."
+    },
+    {
+      "id": "public-assistant-product-difference-pt-br",
+      "reason": "Depends on the public Strategos claim family that is not yet permitted in the claims register."
+    },
+    {
+      "id": "public-assistant-strategos-crm-erp-boundary-pt-br",
+      "reason": "Depends on the public Strategos claim family that is not yet permitted in the claims register."
+    },
+    {
+      "id": "public-assistant-strategos-control-boundary-pt-br",
+      "reason": "Depends on the public Strategos claim family that is not yet permitted in the claims register."
+    },
+    {
+      "id": "public-assistant-strategos-adoption-refusal-pt-br",
+      "reason": "Depends on the public Strategos claim family that is not yet permitted in the claims register."
+    },
+    {
+      "id": "public-assistant-product-feature-refusal-pt-br",
+      "reason": "Depends on the public Strategos claim family that is not yet permitted in the claims register."
+    }
+  ],
+  "signing_trust_anchor_status": "pending",
+  "rollout_authorized": false,
+  "acceptance_effective_only_on_main": true
+}
