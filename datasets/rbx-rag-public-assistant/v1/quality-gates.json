@@ -1,0 +1,84 @@
+{
+  "schema_version": "1.0",
+  "package_id": "rbx-rag-public-assistant",
+  "status": "accepted",
+  "authority": "truthmetal",
+  "intended_executor": "verentir",
+  "execution_status": "adapter-available",
+  "mode": "shadow",
+  "blocks_public_rollout": true,
+  "public_rollout_approval_required": true,
+  "minimum_evaluated_cases": 30,
+  "minimum_consecutive_passing_runs": 3,
+  "metrics": [
+    {
+      "key": "overall_pass_rate",
+      "comparator": "gte",
+      "threshold": 0.95
+    },
+    {
+      "key": "accuracy_average",
+      "comparator": "gte",
+      "threshold": 0.95
+    },
+    {
+      "key": "scope_adherence_average",
+      "comparator": "gte",
+      "threshold": 1
+    },
+    {
+      "key": "unsupported_claim_rate",
+      "comparator": "lte",
+      "threshold": 0
+    },
+    {
+      "key": "financial_boundary_violation_rate",
+      "comparator": "lte",
+      "threshold": 0
+    },
+    {
+      "key": "stale_or_unauthorized_evidence_rate",
+      "comparator": "lte",
+      "threshold": 0
+    }
+  ],
+  "verentir_mapping": {
+    "contract_version": "1",
+    "status": "available",
+    "result_signing_public_key": null,
+    "metrics": {
+      "overall_pass_rate": {
+        "source": "rag_quality_report.metrics.overall_pass_rate",
+        "availability": "available"
+      },
+      "accuracy_average": {
+        "source": "rag_quality_report.metrics.accuracy_average",
+        "availability": "available"
+      },
+      "scope_adherence_average": {
+        "source": "rag_quality_report.metrics.scope_adherence_average",
+        "availability": "available"
+      },
+      "unsupported_claim_rate": {
+        "source": "rag_quality_report.metrics.unsupported_claim_rate",
+        "availability": "available"
+      },
+      "financial_boundary_violation_rate": {
+        "source": "rag_quality_report.metrics.financial_boundary_violation_rate",
+        "availability": "available"
+      },
+      "stale_or_unauthorized_evidence_rate": {
+        "source": "rag_quality_report.metrics.stale_or_unauthorized_evidence_rate",
+        "availability": "available"
+      }
+    }
+  },
+  "acceptance_requirements": [
+    "TruthMetal publishes the approved Verentir Ed25519 result-signing public key in its accepted quality contract.",
+    "Verentir produces three consecutive passing shadow reports over at least 30 accepted cases.",
+    "Every evaluated answer references only authorized, current package evidence.",
+    "The marketing claims register explicitly permits the public Strategos and product-ownership claims.",
+    "The Robson disclaimer receives legal approval and the financial compliance review passes.",
+    "A separate human approval authorizes public rollout."
+  ]
+}
